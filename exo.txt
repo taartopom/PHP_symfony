@@ -1,0 +1,22 @@
+Exercice :
+1- A partir de l'entité Article, créer le formulaire associé : php bin/console doctrine:generate:form
+
+2- Créer un controller ArticleFormController dans lequel vous créez 4 pages :
+    - une page pour visualiser un article en base ($id dans l'url)
+    - une page pour ajouter un article en bdd (utiliser le formulaire)
+    - une page pour modifier un article en bdd  ($id dans l'url)
+    - une page pour supprimer un article en bdd
+
+Un controller avec des routes en annotations doit être importé dans le fichier routing principal
+Pour créer une page, il faut :
+    - une route (avec url et nom de route)
+    - un controller :quelquechoseAction() qui retourne forcément un objet Response
+    - un template à intégrer dans l'objet response
+
+3- dans les routes il faut utiliser le formulaire, il faut :
+       - créer ou récupérer une entité
+       - créer un formulaire à partir du formType correspondant, en lui associant l'entité
+       - attraper la requête
+       - vérifier si le formulaire est soumis
+       - passer la vue du formulaire au template
+       - afficher le formulaire dans le template

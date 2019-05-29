@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    {{ utilisateur.getEmail() }}<br>
+    {{ utilisateur.getDateNaissance() | date('d/m/Y') }}<br>
+    {{ utilisateur.getPassword()}}<br>
+    Publié le {{ utilisateur.getCreatedAt() | date('d/m/Y à H:i:s') }}
+{% endblock %}

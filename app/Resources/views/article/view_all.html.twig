@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+{# surcharge du block menu dans base.html.twig : on laisse le block vide
+    donc plus de menu sur ce template
+#}
+{% endblock %}
+
+{% block body %}
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        table td {
+            border:1px solid;
+            padding: 10px;
+        }
+    </style>
+
+    <h1>Tous les articles</h1>
+    <table>
+    {% for key,article in articles %}
+        <tr>
+            <td>{{ article.getTitle() }}</td>
+            <td>{{ article.getDescription() }}</td>
+            <td>{{ article.getCreatedAt() | date('d/m/Y H:i') }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <h1>Tous les articles en ligne</h1>
+    <table>
+        {% for key,article in articlesOnline %}
+            <tr>
+                <td>{{ article.getTitle() }}</td>
+                <td>{{ article.getDescription() }}</td>
+                <td>{{ article.getCreatedAt() | date('d/m/Y H:i') }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+{# surcharge du block menu dans base.html.twig : on laisse le block vide
+    donc plus de menu sur ce template
+#}
+{% endblock %}
+
+{% block body %}
+    Template pour les filtres twig<br>
+
+    {#
+    plein de filtres twig sur cette page :
+    https://twig.symfony.com/doc/2.x/filters/index.html
+    #}
+
+    {# pour afficher quelquechose en twig : {{  }} #}
+    test<br>
+    {{ "test" }}<br>
+    {# le filtre upper mets en majuscule #}
+    {{ "test" | upper }}<br>
+    {# capitalize mets en majuscule la première lettre #}
+    {{ "test" | capitalize }}<br>
+    {# reverse inverse les éléments d'un tableau ou les lettres d'une chaine #}
+    {{ "test" | reverse }}<br>
+    {# replace permet de remplacer des chaines par d'autres #}
+    {{ "coucou tout le monde" | replace({'coucou': 'salut', 'monde': 'gens'}) }}<br>
+    {# nl2br remplace les retours à la ligne (\n) par des <br> #}
+    {{ texte | nl2br }}<br>
+
+    {# le filtre date formate une date dans le format voulu
+        le mot clé "now" peut être utilisé pour obtenir la date actuelle
+    #}
+    {{ "now" | date('d/m/Y H:i:s') }}<br>
+    {{ dateTime | date('Y-m-d') }}<br>
+    {{ dateTime | date('d/m/Y H:i:s') }}<br>
+
+    {{ htmlParagraphe }}<br>
+    {# le filtre raw force le nvigateur à interpréter les balises html#}
+    {{ htmlParagraphe | raw }}<br>
+
+    {# appliquer des filtres en cascade de gauche à droite #}
+    {{ "salut le monde" | reverse | capitalize }}<br>
+
+    {% if (10 > 5) %}
+        10 est supérieur à 5<br>
+    {% endif %}
+
+    {% if (5 > 10) %}
+        5 est supérieur à 10<br>
+    {% endif %}
+
+    {% if (10 > 5 and "test" == "test") %}
+        10 > 5 et "test" == "test"<br>
+    {% endif %}
+
+    {% if (2 > 5) %}
+        2 sup à 5<br>
+    {% elseif (1 > 2) %}
+        1 sup à 2<br>
+    {% else %}
+        Aucune condition n'est vraie<br>
+    {% endif %}
+
+    {% if (entier < entier2) %}
+        {{ entier }} est inférieur à {{ entier2 }}<br>
+    {% endif %}
+
+    {# déclarer une variable en twig : set #}
+    {% set tableau = ["valeur1", "valeur2", "valeur3"] %}
+    {% for toto in tableau %}
+        {{ toto }}<br>
+    {% endfor %}
+
+    {% set tableauAssociatif = {"cle1":"valeur asso 1", "cle2":"valeur asso 2"} %}
+    {{ tableauAssociatif['cle2'] }}<br>
+
+    {# on peut utiliser les filtres fournis par la bibliothèque TwigExtension#}
+    {{ "HUIFHEiuhC FEHUIVSEH ESKJCNESIOFJ SVJSUIRVJHSEIN CVISEFSEU" | truncate(10) }}<br>
+
+{% endblock %}

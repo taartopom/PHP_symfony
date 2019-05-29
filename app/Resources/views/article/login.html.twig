@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}{% endblock %}
+
+{% block body %}
+
+    {# tester si un utilisateur est connecté #}
+    {% if app.user %}
+    <nav>
+        <a href="{{ path('article_logout') }}">Se déconnecter</a>
+
+        {# vérifier si l'utilisateur est #}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('article_insert_with_form') }}">Ajouter un article</a>
+        {% endif %}
+     </nav>
+    {% endif %}
+
+    <br>
+    {% if roleAdmin %}Vous êtes admin{% else %}Vous n'êtes pas admin{% endif %}
+    <br>
+
+    {# S'il y a une erreur, on l'affiche #}
+    {% if error %}
+        <div>{{ error.message }}</div>
+    {% endif %}
+
+    <form action="{{ path('article_login_check') }}" method="post">
+        <label for="username">Login :</label>
+        <input type="text" id="username" name="_username" />
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="_password" />
+        <br />
+
+        <input type="submit" value="Connexion" />
+    </form>
+{% endblock %}

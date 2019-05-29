@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}{% endblock %}
+
+{% block body %}
+    {# afficher les champs du formulaire un par un, en utilisant
+       la variable formArticle passée depuis le controller #}
+    {{ form_start(formArticle) }}
+        {{ form_row(formArticle.category) }}
+
+        {# {{ form_row(formArticle.title) }} #}
+        {{ form_label(formArticle.title) }}
+        {{ form_widget(formArticle.title, {'attr':{'class': 'form-control', 'placeholder': 'Ici un titre'}}) }}
+        {{ form_errors(formArticle.title) }}
+
+        {{ form_row(formArticle.description) }}
+        {{ form_row(formArticle.isOnline) }}
+        {{ form_row(formArticle.user) }}
+
+     {{ form_row(formArticle.tags) }}
+
+        <input type="submit" value="Enregistrer l'article" />
+
+    {# si un champ n'a pas été ajouté, form_end va l'afficher quoi qu'il arrive#}
+    {{ form_end(formArticle) }}
+{% endblock %}

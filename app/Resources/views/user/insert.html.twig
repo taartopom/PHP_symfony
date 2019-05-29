@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+{# surcharge du block menu dans base.html.twig : on laisse le block vide
+    donc plus de menu sur ce template
+#}
+{% endblock %}
+
+{% block body %}
+    <!--
+    <form method="post" action="">
+        <input type="email" name="email" />
+        <input type="submit" name="btn_user"/>
+    </form>
+    -->
+    {# fonction pour afficher le formulaire en entier #}
+    {# {{ form(formUser) }} #}
+
+    {# afficher les champs du formulaire un par un #}
+    {{ form_start(formUser) }}
+        {{ form_row(formUser.dateNaissance) }}
+        {{ form_row(formUser.password) }}
+        {{ form_row(formUser.email) }}
+        <input type="submit" value="{% if user.id == null %}S'inscrire{% else %}Modifier{% endif %}" />
+    {{ form_end(formUser) }}
+{% endblock %}

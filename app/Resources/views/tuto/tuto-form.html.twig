@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}{% endblock %}
+
+ {% block header %}
+     <h1> Tuto formulaire </h1>
+ {% endblock %}
+
+{% block stylesheets %}
+    <style>
+
+        img {
+            border-radius: 5px;
+            border: 1px solid deepskyblue;
+        }
+
+        .content {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size:1.3em;
+        }
+
+        .content * {
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <p>
+            A partir d'une entité Article déjà existante, ainsi qu'une base de données à jour,
+            que vous pouvez créez sinon avec la commande :
+            <br><b>php bin/console doctrine:generate:entity</b>
+            <br> puis en mettant ensuite à jour la bdd :
+            <br><b>php bin/console doctrine:schema:update --force</b>
+            <br>
+            Une fois que c'est bon, générons en ligne de commande la classe Formulaire correspondante : ArticleType
+            <br><b>php bin/console doctrine:generate:form AppBundle:Article</b>
+        </p>
+        <img src="{{ asset('tuto/1-commande.PNG') }}"/>
+
+        <p>La classe formulaire ArticleType a été créée dans le dossier src/AppBundle/Form/ArticleType.php</p>
+        <img src="{{ asset('tuto/3-arbo.PNG') }}"/>
+
+
+        <p>
+            Voici la classe. Choisisson les champs à afficher plus tard dans le html
+        <br>createdAt n'a pas à être demandé à l'utilisateur : la valeur sera settée automatiquement en PHP lors de la création de l'objet :
+        </p>
+        <img src="{{ asset('tuto/11-articletype.PNG') }}"/>
+
+        <p>
+            Voici la classe sans le createdAt :
+        </p>
+        <img src="{{ asset('tuto/111-articletype.PNG') }}"/>
+
+        <p>
+            Pour qu'un article ait un createdAt automatique, on met une valeur par défaut dans le constructeur de la classe Article
+        </p>
+        <img src="{{ asset('tuto/16-constructeur.PNG') }}"/>
+
+        <p>Maintenant que nous avons une entité Article et une classe formulaire associée ArticleType
+            <br> Créons un controller dans lequel nous créerons une page pour afficher un formulaire d'insertion. Appelons le ArticleFormController.
+            <br> Plaçons ce controller dans le dossier src/AppBundle/Controller/
+
+        </p>
+        <img src="{{ asset('tuto/4-arbo.PNG') }}"/>
+
+        <p>
+            Ce controller est une classe qui ressemble de base à ceci :
+        </p>
+        <img src="{{ asset('tuto/5-controller.PNG') }}"/>
+
+        <p>Créons une page : d'abord la route en annotation avec une URL et un NAME, ainsi qu'un nom de fonction parlant : insertWithFormAction()</p>
+        <img src="{{ asset('tuto/6-controller.PNG') }}"/>
+
+
+        <p>
+            Pour que la route que nous avons créée puisse être appelé, le controller
+            doit être importé dans le fichier routing.yml principal
+        </p>
+        <img src="{{ asset('tuto/15-controller.PNG') }}"/>
+
+
+        <p>
+            La première chose à faire est d'avoir une variable de type Article.
+            Vous pouvez l'instancier pour un INSERT INTO, ou alors la récupérer avec doctrine pour un UPDATE
+        </p>
+        <img src="{{ asset('tuto/7-article.PNG') }}"/>
+
+        <p>
+            Grâce au service form.factory, on va créer un formBuilder.
+            Ce formBuilder va permettre de créer un objet Formulaire.
+            Dans la méthode createBuilder() de la factory, il faut passer deux paramètres
+            <li>Le type de formulaire : ArticleType::class</li>
+            <li>L'objet de type Article à associer au formulaire</li>
+        </p>
+        <img src="{{ asset('tuto/8-formbuilder.PNG') }}"/>
+
+        <p>
+            Récupérer l'objet formulaire depuis le formBuilder
+        </p>
+        <img src="{{ asset('tuto/9-form.PNG') }}"/>
+
+        <p>
+            Attraper l'objet Request pour que le formulaire aille automatiquement
+            aller chercher dans le tableau POST ou GET les données envoyées dans le formulaire.
+            <br>(pour savoir si le formulaire a été soumis, et si c'est le cas, setter automatiquement les propriétés
+            les propriétés de l'objet $article avec les données que l'utilisateur avait saisies dans le formulaire html
+            <br>L'objet Request est automatiquement injecté dans les paramètres du controller en typant une variable avec la classe "Request".
+        </p>
+        <img src="{{ asset('tuto/9-hydrate.PNG') }}"/>
+
+        <p>
+            Créons le fichier template, qui va contenir la vue à afficher sur cette page
+        </p>
+        <img src="{{ asset('tuto/11-template.PNG') }}"/>
+
+        <p>
+            Dans ce template, affichons le formulaire : Balsie d'ouverture et de fermture du formulaire grâce aux fonctions form_start() et form_end()
+        </p>
+        <img src="{{ asset('tuto/12-template.PNG') }}"/>
+
+        <p>
+            Affichons les champs du formulaire d'article ligne par ligne
+        </p>
+        <img src="{{ asset('tuto/13-template.PNG') }}"/>
+
+        <p>
+            Ajoutons un bouton valider qui n'existe dans ArticleType.php
+        </p>
+        <img src="{{ asset('tuto/14-template.PNG') }}"/>
+
+        <p>
+            Testons le formulaire !
+        </p>
+    </div>
+
+{% endblock %}

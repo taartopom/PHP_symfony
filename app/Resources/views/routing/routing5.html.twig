@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    Page de routing 5 : fichier en asp (non c'est pas vrai)<br>
+    <a href="{{ path('page_routing4', {annee: '2017', mois: '05'}) }}">Lien vers routing 4</a>
+
+    <br>
+    <table style="border:1px solid;">
+    {% for key,value in tableauNumerique %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    {% for key,value in tableauAssociatif %}
+        {{ key }} est égal à : {{ value }}<br>
+    {% endfor %}
+{% endblock %}

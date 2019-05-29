@@ -1,0 +1,66 @@
+app:
+    resource: '@AppBundle/Controller/DefaultController.php'
+    type: annotation
+
+exo:
+  resource: '@AppBundle/Controller/ExoController.php'
+  type: annotation
+
+twig:
+  resource: '@AppBundle/Controller/TwigController.php'
+  type: annotation
+
+article:
+  resource: '@AppBundle/Controller/ArticleController.php'
+  type: annotation
+  prefix: article
+
+user:
+  resource: '@AppBundle/Controller/UserController.php'
+  type: annotation
+
+article_form:
+  resource: '@AppBundle/Controller/ArticleFormController.php'
+  type: annotation
+  prefix: article
+
+service:
+  resource: '@AppBundle/Controller/ServiceController.php'
+  type: annotation
+
+# Nom de la route
+page_routing1:
+    # URL de la route
+    path: /page-routing1
+    # le controller a appeler quand l'url dans le navigateur matche
+    defaults: {_controller: AppBundle:Routing:routing1 }
+
+page_routing2:
+  # URL de la route
+  path: /routing/page2
+  # le controller a appeler quand l'url dans le navigateur matche
+  defaults: {_controller: AppBundle:Routing:routing2 }
+
+page_routing3:
+  # URL de la route
+  path: /routing/user/{id}
+  # le controller a appeler quand l'url dans le navigateur matche
+  defaults: {_controller: AppBundle:Routing:routing3 }
+
+page_routing4:
+  # URL de la route
+  path: /routing/blog/{annee}/{mois}/{jour}
+  # le controller a appeler quand l'url dans le navigateur matche
+  #paramètre facultatifs : donner une valeur par défaut. Ici jour a pour valeur par défaut 01
+  defaults: {_controller: AppBundle:Routing:routing4, jour: '01' }
+  # section contraintes : forcer des formats de données pour que l'url matche
+  requirements:
+    annee: '\d{4}'
+    mois: '\d{2}'
+    jour: '\d{2}'
+
+page_routing5:
+  # URL de la route
+  path: /routing/page5.asp
+  # le controller a appeler quand l'url dans le navigateur matche
+  defaults: {_controller: AppBundle:Routing:routing5 }

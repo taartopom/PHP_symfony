@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+{# surcharge du block menu dans base.html.twig : on laisse le block vide
+    donc plus de menu sur ce template
+#}
+{% endblock %}
+
+{% block body %}
+    {{ user.getEmail() }}<br>
+    {{ user.getPassword() }}<br>
+    Né le {{ user.getDateNaissance() | date('d/m/Y') }}<br>
+    Créé le {{ user.getCreatedAt() | date('d/m/Y H:i:s') }}
+{% endblock %}

@@ -1,0 +1,33 @@
+{# Héritage de template : on prend le contenu de base pour
+l'utiliser dans ce fichier #}
+{% extends 'base.html.twig' %}
+
+{# redéfinir un block : écrase le contenu du block parent #}
+{% block title %}
+    {# le title "welcome!" est remplacé par : #}
+    Titre page avec l'héritage de template
+{% endblock %}
+
+{% block header %}
+    {# la fonction parent() reprend ce qu'il y a vait déjà dans
+    le block du template parent #}
+    {{ parent() }}
+    <h2>Page héritage template</h2>
+
+    <a href="{{ path('page_avec_variable') }}">Page avec variable</a>
+{% endblock %}
+
+{#
+    ajouter du contenu dans le block "body"
+    défini dans le template parent : on redéfinit le block
+#}
+{% block body %}
+    C'est la page de template_heritage
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    //alert('salut');
+</script>
+{% endblock %}
+

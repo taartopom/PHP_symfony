@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+{# surcharge du block menu dans base.html.twig : on laisse le block vide
+    donc plus de menu sur ce template
+#}
+{% endblock %}
+
+{% block body %}
+
+    {# fonction pour afficher le formulaire en entier #}
+    {# {{ form(formArticle) }} #}
+
+        {{ form_start(formArticle) }}
+        {{ form_row(formArticle.title) }}
+        {{ form_row(formArticle.description) }}
+        {{ form_row(formArticle.createdAt) }}
+        <input type="submit" value="{% if article.id == null %}S'inscrire{% else %}Modifier{% endif %}" />
+
+    {{ form_end(formArticle) }}
+{% endblock %}

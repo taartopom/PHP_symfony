@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+{# surcharge du block menu dans base.html.twig : on laisse le block vide
+    donc plus de menu sur ce template
+#}
+{% endblock %}
+
+{% block body %}
+    {#
+    fonctionnement de la notation {{  objet.attribut }}
+    https://openclassrooms.com/fr/courses/3619856-developpez-votre-site-web-avec-le-framework-symfony/3621582-le-moteur-de-templates-twig
+    #}
+    {{ article.title }}<br>
+    {{ article.getDescription() }}<br>
+    Publié le {{ article.getCreatedAt() | date('d/m/Y à H:i:s') }}<br>
+
+    {#
+        doctrine génère automatiquerment la requete sql pour aller
+        chercher le user et la catégroy associés à cet article
+    #}
+    Publié par {{ article.getUser() }}<br>
+    Catégorie {{ article.getCategory().getName() }}<br>
+    Tags :
+    <ul>
+        {% for tag in article.getTags() %}
+            <li>{{ tag.getName() }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

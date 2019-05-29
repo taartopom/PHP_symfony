@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+   <h1>Ceci est la page 3</h1>
+
+   <span>le resultat de la multiplication est :{{ cle }}</span> <br>
+
+   <a href="{{ path('page1') }}">Lien vers la page 1</a>
+
+   <a href="{{ path('page2') }}">Lien vers la page 2</a>
+
+{% endblock %}

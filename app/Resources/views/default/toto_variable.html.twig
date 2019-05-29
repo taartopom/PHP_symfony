@@ -1,0 +1,13 @@
+{# Héritage de template : on prend le contenu de base pour
+l'utiliser dans ce fichier #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    Variable passée depuis le controller : {{ i }}<br>
+    Variable 2 passée depuis le controller : {{ cle2 }}
+    <br>
+
+    {# la fonction path() de twig génère une url
+    vers une page. Il faut mettre le name de la route voulue #}
+    <a href="{{ path('template_heritage') }}">Lien vers la page tempalte héritage</a>
+{% endblock %}

@@ -1,0 +1,82 @@
+Créer un compte github
+
+Puis se placer en lien de commande dans le dossier où vous voulez créer le projet
+
+Pour cloner le projet en ligne :
+git clone https://github.com/fsanter/symfony_formation.git
+
+Se placer dans le dossier de l'application :
+cd symfony_formation
+
+Installer les vendors :
+composer update
+
+Si pas assez de mémoire pour lancer la commande :
+php -d memory_limit=2G composer.phar update
+
+pour revenir à la dernière version sur le serveur en écrasant vos modifs :
+git reset --hard origin/master
+
+
+Exo : Créer une nouvelle page
+route, controller, template
+
+Commandes doctrine :
+Créer la base en fonction des informations dans le fichier parameters.yml
+php bin/console doctrine:database:create
+
+Générer une entité :
+php bin/console doctrine:generate:entity
+
+Régénerer une entité (après avoir ajouter des propriétés dans la classe par exemple)
+php bin/console doctrine:generate:entities AppBundle
+
+Mettre la base de données à jour en fonction des entités présentes dans le code
+php bin/console doctrine:schema:update --force
+
+Pensez à vérifier que tout est ok avant avec le paramètre --dump-sql
+php bin/console doctrine:schema:update --dump-sql
+
+
+Exercice :
+Créer l'entité Utilisateur avec les propriétés suivantes :
+id, email, dateNaissance, createdAt, password
+- coder l'entité (avec ligne de commande doctrine:generate:entity)
+- mettez la base de données à jour (doctrine:schema:update)
+
+Créer le controller (routes, méthodes, template) qui va manipuler cet objet (CRUD) :
+UserController :
+avec les méthodes :
+    - insertAction() : insérer un utilisateur en bdd
+    - viewAction($id) : afficher un utilisateur, donc faites le template associé
+    - removeAction($id) : supprimer un utilisateur en bdd
+
+
+  Exercice :
+  - Lier les deux entités Category et Article
+  - Un article doit avoir une catégorie
+  - Une categorie peut avoir plusieurs articles
+  1- Coder la configuration dans chaque entité
+    - manyToOne / oneToMany / manyToMany / oneToOne
+
+  2- Mettre à jour les entités (getter/setter,etc.)
+    php bin/console doctrine:generate:entities AppBundle
+
+  3- Mettre à jour la base
+    php bin/console doctrine:schema:update --force
+
+  4- Ajouter dans le formulaire php article le champs categorie
+    ->add('category')
+
+  5- Ajouter dans la vue le champ categorie
+    {{ form_row(form.category) }}
+
+
+Créer une commande : php bin/console generate:command
+    Un fichier Command.php est créé dans le dossier src/AppBundle/Command
+    Vous pouvez accéder aux services Symfony en récupérant le container :
+        - $this->getContainer()
+     Ou encore demaner des informations à l'utilisateur grâce au helper:
+        - $this->getHelper()
+    Ensuite vous pouvez coder votre algo en php symfony en fonction de votre
+    besoin :)
